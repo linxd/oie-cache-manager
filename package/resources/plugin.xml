@@ -4,12 +4,12 @@
 <!-- Copyright (c) 2026 Diridium Technologies Inc. -->
 
 <pluginMetaData path="oie-cache-manager">
-    <name>OIE Cache Manager</name>
+    <name>OIE 缓存管理器</name>
     <author>Diridium Technologies Inc.</author>
     <pluginVersion>${project.version}</pluginVersion>
     <mirthVersion>${plugin.supported.mc.versions}</mirthVersion>
     <url>https://diridium.com</url>
-    <description>Guava LoadingCache wrapper for fast in-memory lookups against external databases.</description>
+    <description>基于 Guava LoadingCache 的封装，支持对外部数据库的快速内存查找。</description>
 
     <serverClasses>
         <string>com.diridium.oie.cache.CacheServerPlugin</string>

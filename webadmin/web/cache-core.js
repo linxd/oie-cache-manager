@@ -93,10 +93,10 @@ export function estWithoutCacheMs(stats) {
 // (Companion to estWithoutCacheMs; not in the pinned module contract.)
 export function fmtDuration(millis) {
     const ms = num(millis);
-    if (ms < 1_000) return ms.toFixed(0) + ' ms';
-    if (ms < 60_000) return (ms / 1_000).toFixed(1) + ' s';
-    if (ms < 3_600_000) return (ms / 60_000).toFixed(1) + ' min';
-    return (ms / 3_600_000).toFixed(1) + ' hr';
+    if (ms < 1_000) return ms.toFixed(0) + ' 毫秒';
+    if (ms < 60_000) return (ms / 1_000).toFixed(1) + ' 秒';
+    if (ms < 3_600_000) return (ms / 60_000).toFixed(1) + ' 分钟';
+    return (ms / 3_600_000).toFixed(1) + ' 小时';
 }
 
 /* ---- query-test result parsing (CacheDefinitionDialog.onTestQuery, 1:1) ----- */
@@ -146,33 +146,33 @@ export function validateDefinition(def, existingNames) {
 
     const name = str(d.name);
     if (name === '') {
-        errors.push({ field: 'name', message: 'Name is required.' });
+        errors.push({ field: 'name', message: '名称为必填项。' });
     } else {
         const lower = name.toLowerCase();
         const names = Array.isArray(existingNames) ? existingNames : [];
         if (names.some((n) => str(n).toLowerCase() === lower)) {
-            errors.push({ field: 'name', message: 'A cache definition named "' + name + '" already exists.' });
+            errors.push({ field: 'name', message: '名为 "' + name + '" 的缓存定义已存在。' });
         }
     }
 
     const driver = str(d.driver);
     if (driver === '') {
-        errors.push({ field: 'driver', message: 'Driver class is required.' });
+        errors.push({ field: 'driver', message: '驱动类为必填项。' });
     }
 
     const url = str(d.url);
     if (url === '') {
-        errors.push({ field: 'url', message: 'JDBC URL is required.' });
+        errors.push({ field: 'url', message: 'JDBC URL 为必填项。' });
     }
 
     const query = str(d.query);
     if (query === '') {
-        errors.push({ field: 'query', message: 'Query is required.' });
+        errors.push({ field: 'query', message: '查询语句为必填项。' });
     }
 
     const valueColumn = str(d.valueColumn);
     if (valueColumn === '') {
-        errors.push({ field: 'valueColumn', message: 'Value Column is required.' });
+        errors.push({ field: 'valueColumn', message: '值列为必填项。' });
     }
 
     // Long.parseLong strictness, plus a JS-side safety bound: digit strings
@@ -187,9 +187,9 @@ export function validateDefinition(def, existingNames) {
     const maxSizeText = str(d.maxSize);
     if (maxSizeText !== '') {
         if (!parsable(maxSizeText)) {
-            errors.push({ field: 'maxSize', message: 'Max Size must be a number.' });
+            errors.push({ field: 'maxSize', message: '最大大小必须为数字。' });
         } else if (Number(maxSizeText) < 0) {
-            errors.push({ field: 'maxSize', message: 'Max Size must be non-negative.' });
+            errors.push({ field: 'maxSize', message: '最大大小必须为非负数。' });
         } else {
             maxSize = Number(maxSizeText);
         }
@@ -199,9 +199,9 @@ export function validateDefinition(def, existingNames) {
     const evictionText = str(d.evictionDurationMinutes);
     if (evictionText !== '') {
         if (!parsable(evictionText)) {
-            errors.push({ field: 'evictionDurationMinutes', message: 'Eviction duration must be a number.' });
+            errors.push({ field: 'evictionDurationMinutes', message: '淘汰时间必须为数字。' });
         } else if (Number(evictionText) < 0) {
-            errors.push({ field: 'evictionDurationMinutes', message: 'Eviction duration must be non-negative.' });
+            errors.push({ field: 'evictionDurationMinutes', message: '淘汰时间必须为非负数。' });
         } else {
             evictionDurationMinutes = Number(evictionText);
         }
@@ -211,12 +211,12 @@ export function validateDefinition(def, existingNames) {
     const maxConnectionsText = str(d.maxConnections);
     if (maxConnectionsText !== '') {
         if (!parsable(maxConnectionsText)) {
-            errors.push({ field: 'maxConnections', message: 'Max Connections must be a number.' });
+            errors.push({ field: 'maxConnections', message: '最大连接数必须为数字。' });
         } else if (Number(maxConnectionsText) < 1) {
-            errors.push({ field: 'maxConnections', message: 'Max Connections must be at least 1.' });
+            errors.push({ field: 'maxConnections', message: '最大连接数至少为 1。' });
         } else if (Number(maxConnectionsText) > 2147483647) {
             // Integer.MAX_VALUE — the model field is a Java int.
-            errors.push({ field: 'maxConnections', message: 'Max Connections must be a number.' });
+            errors.push({ field: 'maxConnections', message: '最大连接数必须为数字。' });
         } else {
             maxConnections = Number(maxConnectionsText);
         }
@@ -312,13 +312,13 @@ export function snapshotStatus(offset, shownCount, matched, total) {
     const to = off + shown;
 
     if (m < t) {
-        return groupInt(from) + '–' + groupInt(to) + ' of '
-            + groupInt(m) + ' matches (' + groupInt(t) + ' total)';
+        return groupInt(from) + '–' + groupInt(to) + ' / '
+            + groupInt(m) + ' 条匹配（共 ' + groupInt(t) + ' 条总计）';
     }
     if (shown < m || off > 0) {
-        return groupInt(from) + '–' + groupInt(to) + ' of ' + groupInt(t) + ' entries';
+        return groupInt(from) + '–' + groupInt(to) + ' / ' + groupInt(t) + ' 条记录';
     }
-    return groupInt(shown) + ' entries';
+    return groupInt(shown) + ' 条记录';
 }
 
 /* ---- value truncation (CacheInspectorDialog.truncateValue, 1:1) ------------- */

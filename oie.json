@@ -1,10 +1,13 @@
 {
     "schemaVersion": 1,
     "id": "oie-cache-manager",
-    "name": "OIE Cache Manager",
-    "description": "Database-backed lookup caches for channels: define JDBC-sourced caches with automatic refresh and eviction, look values up from any script via $g('name').lookup(key), monitor live hit-rate statistics, inspect cached entries, and refresh on demand. Works in both the Swing and web administrators.",
+    "name": "OIE 缓存管理器",
+    "description": "为通道提供数据库支持的查询缓存：定义 JDBC 数据源缓存，支持自动刷新和淘汰策略，可通过任意脚本中的 $g(\"name\").lookup(key) 查找值，监控实时命中率统计，检查缓存条目，并按需刷新。同时支持 Swing 和 Web 管理界面。",
     "type": "plugin",
-    "ui": ["web", "swing"],
+    "ui": [
+        "web",
+        "swing"
+    ],
     "version": "1.2.0",
     "minEngineVersion": "4.6.0",
     "maxEngineVersion": null,

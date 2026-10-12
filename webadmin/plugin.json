@@ -1,9 +1,13 @@
 {
     "id": "oie-cache-manager",
-    "name": "OIE Cache Manager",
+    "name": "OIE 缓存管理器",
     "version": "1.2.0",
     "author": "Diridium Technologies Inc.",
-    "description": "Database-backed lookup caches for channels: define JDBC-sourced caches, monitor live statistics, inspect cached entries, and refresh on demand. Web administrator UI for the oie-cache-manager engine plugin.",
-    "oie": { "apiMin": "4.6" },
-    "client": { "entry": "web/plugin.js" }
+    "description": "为通道提供数据库支持的查询缓存：定义 JDBC 数据源缓存，监控实时统计，检查缓存条目，并按需刷新。oie-cache-manager 引擎插件的 Web 管理界面。",
+    "oie": {
+        "apiMin": "4.6"
+    },
+    "client": {
+        "entry": "web/plugin.js"
+    }
 }
